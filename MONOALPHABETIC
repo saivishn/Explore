@@ -1,0 +1,62 @@
+
+import java.util.*;
+
+public class Main{
+  public static char[] nrml={'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+            's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+            
+    public static char[] code={'m','n','b','v','c','x','z','l','k','j','h','g','f','d','s','a','p','o','i','u','y','t','r','e','w','q'};
+    
+    public static String encrypt(String s){
+        String cipher="";
+        int len=s.length();
+        
+        for( int i=0;i<len;i++)
+        {
+            for (int j=0;j<26;j++)
+            {
+                if(s.charAt(i)== nrml[j])
+                {
+                    cipher+=code[j];
+                    break;
+                }
+            }
+        }
+        return cipher;
+    }
+    
+    
+    
+    public static String decrypt(String s){
+        String dec="";
+        int len=s.length();
+        
+        for( int i=0;i<len;i++)
+        {
+            for (int j=0;j<26;j++)
+            {
+                if(s.charAt(i)== code[j])
+                {
+                    dec+=nrml[j];
+                    break;
+                }
+            }
+        }
+        return dec;
+    }
+public static void  main(String[] args)
+    {
+        
+    
+        System.out.print("enter a plain text");
+        Scanner sc=new Scanner(System.in);
+        String plaintext=sc.nextLine();
+        System.out.println("your plaintext is :"+plaintext);
+        
+        String e=encrypt(plaintext);
+        System.out.println(e);
+        String d=decrypt(e);
+        System.out.println(d);
+    }
+}
