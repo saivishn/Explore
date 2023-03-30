@@ -1,0 +1,32 @@
+import java.util.*;
+import java.security.*;
+import java.math.*;
+
+import java.util.Base64;
+
+public class Main{
+    public static void main(String[] args ) throws Exception{
+        KeyPairGenerator keyGen=KeyPairGenerator.getInstance("DSA");
+        keyGen.initialize(1024);
+        KeyPair keyPair = keyGen.generateKeyPair();
+        PublicKey publicKey=keyPair.getPublic();
+        PrivateKey privateKey=keyPair.getPrivate();
+        
+        
+        String message= " hello world";
+        byte[] messageBytes = message.getBytes();
+        
+        
+        
+        Signature signature = Signature.getInstance("SHA256withDSA");
+        signature.initSign(privateKey);
+        signature.update(messageBytes);
+        
+        byte[] digitalSignature = signature.sign();
+        signature.initVerify(publicKey);
+        signature.update(messageBytes);
+        boolean  verified= signature.verify(digitalSignature);
+        System.out.println("pk"+privateKey);
+         System.out.println(""+verified);       
+    }
+}
