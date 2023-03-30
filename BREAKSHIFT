@@ -1,0 +1,70 @@
+import java.util.*;
+class Main{
+    public static void main(String args[])
+    {
+         Scanner sc= new Scanner(System.in);
+         int shift,i,n,p,key;
+         String str;
+         String str1="";
+         System.out.println("enter the plain text");
+         str=sc.nextLine();
+         str=str.toLowerCase();
+         n=str.length();
+         
+         char ch1[] = str.toCharArray();
+         char ch;
+         
+         System.out.println("enter the shift value");
+         shift=sc.nextInt();
+         
+         System.out.println("ur encrypted text is :");
+         for(i=0;i<n;i++)
+         {
+             if(Character.isLetter(ch1[i]))
+             {
+                 ch=(char)(((int)ch1[i]+shift-97)%26+97);
+                 str1=str1+ch;
+             }
+             else if(ch1[i]==' ')
+             {
+                 str1= str1+ch1[i];
+                 
+             }
+             
+        }
+        
+        System.out.println(str1);
+    
+    
+    System.out.println("cipherText:" + str1);
+    n=str1.length();
+    char ch2[] = str1.toCharArray();
+    
+    char chh;
+    
+    System.out.println("possible plain text is");
+    
+    str1="";
+    for(key=26;key>=1;key--)
+    {
+        for(i=0;i<n;i++)
+        {
+            if(Character.isLetter(ch2[i]))
+             {
+                 chh=(char)(((int)ch2[i]+key-97)%26+97);
+                 str1=str1+chh;
+             }
+             else if(ch2[i]==' ')
+             {
+                 str1= str1+ch2[i];
+                 
+             }
+        }   
+             p=26-key;
+             System.out.println("for key"+p +":"+str1);
+             str1="";
+        
+    }
+}
+}
+
