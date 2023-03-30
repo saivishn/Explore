@@ -1,0 +1,30 @@
+import javax.crypto.*;
+import java.security.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String plainText = "This is a secret message.";
+        SecretKey secretKey = GenerateKey();
+        byte[] cipherText = encrypt(plainText.getBytes(), secretKey);
+        byte[] decryptedText = decrypt(cipherText, secretKey);
+        System.out.println("Plaintext: " + plainText);
+        System.out.println("Ciphertext: " + Base64.getEncoder().encodeToString(cipherText));
+        System.out.println("Decrypted Text: " + new String(decryptedText));
+    }
+    private static SecretKey GenerateKey() throws NoSuchAlgorithmException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        return keyGenerator.generateKey();
+    }
+    private static byte[] encrypt(byte[] plaintext, SecretKey secretKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        return cipher.doFinal(plaintext);
+    }
+    private static byte[] decrypt(byte[] ciphertext, SecretKey secretKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        return cipher.doFinal(ciphertext);
+    }
+
+}
