@@ -1,0 +1,48 @@
+
+import java.util.*;
+public class Vernum {
+	public static void main(String[] args) {
+		String string,k;
+		StringBuffer key,
+		en = new StringBuffer(""),
+		de = new StringBuffer("");
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter String");
+		string=sc.nextLine();
+		System.out.println("Enter your key");
+		k=sc.next();
+		k=k.toUpperCase();
+		string=string.toUpperCase();
+		
+		key=new StringBuffer(k);
+		
+		int j=0;
+		if(k.length()==string.length())
+			key=new StringBuffer(k);
+		else {
+		for(int i=k.length()-1;i<=string.length();i++)
+		{
+			key.append(Character.toString(k.charAt(j)));
+			j=(j+1)%(k.length());
+		}
+		}
+		
+		for(int i=0;i<string.length();i++)
+		{
+			int x=(int)string.charAt(i)-65;
+			int y=(int)key.charAt(i)-65;
+			int z=x^y;
+			en.append(Character.toString((char)(z+65)));
+		}
+		System.out.println("cipher text:"+en);
+		for(int i=0;i<en.length();i++)
+		{
+			int x=(int)en.charAt(i)-65;
+			int y=(int)key.charAt(i)-65;
+			int z=x^y;
+			de.append(Character.toString((char)(z+65)));
+		}
+		System.out.println("plain text:"+de);
+	}
+}
+
